@@ -1,0 +1,33 @@
+body, html {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #222;
+}
+
+#sigil {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    border: 2px solid #444;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #777;
+}
