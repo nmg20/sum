@@ -6,19 +6,34 @@ body, html {
     height: 100vh;
     margin: 0;
     background-color: #222;
+    color: white;
 }
 
-#sigil {
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+canvas {
+    width: 500px;
+    height: 500px;
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    border: 2px solid #444;
+}
+
+/* #sigil {
     width: 500px;
     height: 500px;
     border-radius: 50%;
     border: 2px solid #444;
     background-color: #f0f0f0;
     overflow: hidden;
-}
+} */
 
 button {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
     background-color: #555;
@@ -30,4 +45,13 @@ button {
 
 button:hover {
     background-color: #777;
+}
+
+.spell-output {
+    margin-left: 20px;
+    color: red;
+}
+
+#coordinates {
+    font-family: monospace;
 }
