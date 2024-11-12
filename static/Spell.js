@@ -7,11 +7,11 @@ class Spell {
       this.strokes.push(stroke);
   }
 
-  drawSpell(ctx) {
-      this.strokes.forEach(stroke => stroke.draw(ctx));
+  clearStrokes() {
+      this.strokes = []; // Clear all strokes in the spell
   }
 
-  isComplete() {
-      return this.strokes.length > 0 && this.strokes[this.strokes.length - 1].isComplete();
+  drawSpell(ctx) {
+      this.strokes.forEach(stroke => stroke.draw(ctx)); // Draw each stroke in the spell
   }
 }

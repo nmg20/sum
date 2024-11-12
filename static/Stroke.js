@@ -1,46 +1,36 @@
 class Stroke {
-  constructor(startX, startY, initialLineWidth = 40, minLineWidth = 3) {
-      this.points = [{ x: startX, y: startY }];
-      this.initialLineWidth = initialLineWidth;
-      this.minLineWidth = minLineWidth;
-      this.lineWidths = [initialLineWidth];
-      this.lastX = startX;
-      this.lastY = startY;
-      this.timeStart = Date.now();
-  }
+    constructor(x, y) {
+        this.points = [{ x, y }];
+        this.initialLineWidth = 40;
+        this.minLineWidth = 20;
+    }
 
-  addPoint(x, y) {
-      const distance = Math.sqrt((x - this.lastX) ** 2 + (y - this.lastY) ** 2);
+    addPoint(x, y) {
+        this.points.push({ x, y });
+    }
 
-      const newWidth = Math.max(this.minLineWidth, this.lineWidths[this.lineWidths.length - 1] - distance * 0.1);
-      this.points.push({ x, y });
-      this.lineWidths.push(newWidth);
+    draw(ctx) {
+        if (this.points.length < 2) return;
 
-      this.lastX = x;
-      this.lastY = y;
-  }
+        ctx.beginPath();
+        ctx.moveTo(this.points[0].x, this.points[0].y);
 
-  draw(ctx) {
-      ctx.beginPath();
-      ctx.moveTo(this.points[0].x, this.points[0].y);
+        let currentLineWidth = this.initialLineWidth;
 
-      for (let i = 1; i < this.points.length; i++) {
-          const point = this.points[i];
-          const prevPoint = this.points[i - 1];
-          
-          const segmentWidth = this.lineWidths[i];
+        for (let i = 1; i < this.points.length; i++) {
+            const { x, y } = this.points[i];
+            const prevPoint = this.points[i - 1];
+            const distance = Math.sqrt((x - prevPoint.x) ** 2 + (y - prevPoint.y) ** 2);
 
-          ctx.lineWidth = segmentWidth;
-          ctx.strokeStyle = "#000";
-          ctx.lineCap = "round";
-          ctx.moveTo(prevPoint.x, prevPoint.y);
-          ctx.lineTo(point.x, point.y);
-          ctx.stroke();
-      }
-      ctx.closePath();
-  }
+            // Adjust line width gradually
+            currentLineWidth = Math.max(this.minLineWidth, currentLineWidth - distance * 0.1);
+            ctx.lineWidth = currentLineWidth;
+            ctx.lineTo(x, y);
+        }
 
-  isComplete() {
-      return Date.now() - this.timeStart >= 5000;
-  }
+        ctx.strokeStyle = "#000";
+        ctx.lineCap = "round";
+        ctx.stroke();
+        ctx.closePath();
+    }
 }
