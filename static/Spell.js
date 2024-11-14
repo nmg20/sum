@@ -8,10 +8,14 @@ class Spell {
   }
 
   clearStrokes() {
-      this.strokes = []; // Clear all strokes in the spell
+      this.strokes = [];
   }
 
   drawSpell(ctx) {
       this.strokes.forEach(stroke => stroke.draw(ctx)); // Draw each stroke in the spell
+  }
+
+  getStrokesCoordinates() {
+    return this.strokes.map(stroke => stroke.getCoordinates());
   }
 }

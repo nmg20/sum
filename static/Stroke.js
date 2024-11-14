@@ -26,11 +26,17 @@ class Stroke {
             currentLineWidth = Math.max(this.minLineWidth, currentLineWidth - distance * 0.1);
             ctx.lineWidth = currentLineWidth;
             ctx.lineTo(x, y);
-        }
+            ctx.strokeStyle = "#000";
+            ctx.lineCap = "round";
+            ctx.stroke();
 
-        ctx.strokeStyle = "#000";
-        ctx.lineCap = "round";
-        ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+        }
         ctx.closePath();
+    }
+
+    getCoordinates() {
+        return this.points;
     }
 }
